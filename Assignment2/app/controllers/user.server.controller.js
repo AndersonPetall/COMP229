@@ -26,7 +26,7 @@ exports.list = async function (req, res, next) {
         users: users,
       });
     }
-  });
+  }).sort({ name: 1 });
 };
 exports.listOne = async function (req, res, next) {
   User.findById(req.params.id, (err, user) => {
@@ -37,6 +37,25 @@ exports.listOne = async function (req, res, next) {
         title: "BusinessContactsListDetail Page",
         user: user,
       });
+    }
+  });
+};
+exports.update = async function (req, res, next) {
+  User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
+    if (err) {
+      return next(err);
+    } else {
+      console.log(user);
+      res.redirect("/list");
+    }
+  });
+};
+exports.delete = async function (req, res, next) {
+  User.findByIdAndDelete(req.params.id, (err) => {
+    if (err) {
+      return next(err);
+    } else {
+      res.redirect("/list");
     }
   });
 };
