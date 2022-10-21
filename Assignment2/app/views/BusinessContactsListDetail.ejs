@@ -18,10 +18,22 @@
         <td>
           <table width="760" border="0" cellspacing="10" cellpadding="0">
             <tr>
-              <td><h2>Message Success</h2></td>
+              <td><h2>Business Contacts List Detao; View HomePage</h2></td>
             </tr>
             <tr>
-              <td><%-include("./partials/content")%></td>
+              <td>Welcome to my Personal HomePage</td>
+            </tr>
+            <tr>
+              <div>
+                <hr />
+                <span>name:</span> <%= user.name %><br />
+                <span>phone:</span> <%= user.phone %><br />
+                <span>email:</span> <%= user.email %><br />
+              </div>
+            </tr>
+            <tr>
+              <button><a href="/list/<%= user.id %>">Update</a></button>
+              <button><a href="/list/<%= user.id %>">Delete</a></button>
             </tr>
           </table>
         </td>

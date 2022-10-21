@@ -1,4 +1,19 @@
-<footer>
-  <hr style="border-style: groove; border-width: 2px; width: 760px" />
-  <h6 style="text-align: center">Copyright@ Xingjian REN</h6>
-</footer>
+<% users.forEach(function(user){ %>
+<hr />
+<div>
+  <span>name:</span>
+  <%= user.name %>
+</div>
+<div>
+  <span>phone:</span>
+  <%= user.phone %>
+</div>
+<div>
+  <span>email:</span>
+  <%= user.email %>
+</div>
+<div>
+  <button><a href="/list/<%= user.id %>">Update</a></button>
+  <button><a href="/list/<%= user.id %>">Delete</a></button>
+</div>
+<% });%>

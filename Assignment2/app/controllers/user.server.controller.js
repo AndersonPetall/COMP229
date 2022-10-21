@@ -2,11 +2,10 @@ const mongoose = require("../../config/mongoose");
 const User = require("../models/user.server.model");
 exports.create = async function (req, res, next) {
   let sample = new User({
-    firstname: "name2",
-    lastname: "name3",
+    name: "name2",
+    phone: "name3",
     email: "email1@gmail.com",
-    username: "name3",
-    password: "234",
+    message: "name3",
   });
   try {
     let user = new User(sample);
@@ -17,12 +16,54 @@ exports.create = async function (req, res, next) {
     return next(err);
   }
 };
-exports.list = function (req, res, next) {
+exports.list = async function (req, res, next) {
   User.find({}, (err, users) => {
     if (err) {
       return next(err);
     } else {
-      res.status(200).json(users);
+      res.render("BusinessContactsList", {
+        title: "BusinessContactListPage Page",
+        users: users,
+      });
     }
+  });
+};
+exports.listOne = async function (req, res, next) {
+  User.findById(req.params.id, (err, user) => {
+    if (err) {
+      return next(err);
+    } else {
+      res.render("BusinessContactsListDetail", {
+        title: "BusinessContactsListDetail Page",
+        user: user,
+      });
+    }
+  });
+};
+exports.renderLoginPage = function (req, res) {
+  if (req.session.lastVisit) {
+    console.log(req.session.lastVisit);
+  }
+  req.session.lastVisit = new Date();
+  res.render("Login", {
+    title: "Login Page",
+  });
+};
+exports.renderUpdatePage = function (req, res) {
+  if (req.session.lastVisit) {
+    console.log(req.session.lastVisit);
+  }
+  req.session.lastVisit = new Date();
+  res.render("Update", {
+    title: "Update Page",
+  });
+};
+exports.renderBusinessContactsListPage = function (req, res) {
+  if (req.session.lastVisit) {
+    console.log(req.session.lastVisit);
+  }
+  req.session.lastVisit = new Date();
+  res.render("BusinessContactsList", {
+    title: "BusinessContactListPage Page",
   });
 };
