@@ -22,23 +22,18 @@
             </tr>
             <tr>
               <td rowspan="3">
-                <form action="/MessagesPage" method="post">
+                <form action="/login" method="post">
                   <fieldset>
                     <legend>&nbsp&nbspAny Comments&nbsp&nbsp</legend>
                     username:
-                    <input type="text" name="name" id="nameLogin" /><br />
+                    <input type="text" name="username" id="nameLogin" /><br />
                     password:
                     <input
-                      type="text"
-                      name="email"
-                      id="emailLogin"
+                      type="password"
+                      name="password"
+                      id="passwordLogin"
                     /><br /><br />
-                    <input
-                      type="submit"
-                      value="submit"
-                      id="submitBtnLogin"
-                      onclick="submit()"
-                    />
+                    <input type="submit" value="submit" id="submitBtnLogin" />
                     <input type="reset" value="reset" />
                   </fieldset>
                 </form>

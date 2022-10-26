@@ -1,16 +1,43 @@
 const mongoose = require("../../config/mongoose");
 const User = require("../models/user.server.model");
-exports.create = async function (req, res, next) {
-  let sample = new User({
-    name: "name2",
-    phone: "name3",
-    email: "email1@gmail.com",
-    message: "name3",
-  });
+const passport = require("passport");
+// Render login page
+exports.getLoginPage = (req, res, next) => {
+  if (!req.user) {
+    res.render("login", {
+      title: "Login",
+      // alert: 'User Does Not Exist',
+      //displayName: req.user ? req.user.displayName : "",
+    });
+  } else {
+    res.redirect("/list");
+  }
+};
+
+// Process Login of User
+exports.loginUser = async (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      console.log("Authentication Error");
+      return res.redirect("/login");
+    }
+
+    req.login(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect("/list");
+    });
+  })(req, res, next);
+};
+
+exports.create = function (req, res, next) {
   try {
-    let user = new User(sample);
-    //let user = new User(req.body);
-    await user.save();
+    User.create(req.body);
+    res.redirect("/list");
   } catch (err) {
     console.log("no");
     return next(err);
@@ -84,5 +111,14 @@ exports.renderBusinessContactsListPage = function (req, res) {
   req.session.lastVisit = new Date();
   res.render("BusinessContactsList", {
     title: "BusinessContactListPage Page",
+  });
+};
+exports.renderRegisterPage = function (req, res) {
+  if (req.session.lastVisit) {
+    console.log(req.session.lastVisit);
+  }
+  req.session.lastVisit = new Date();
+  res.render("Register", {
+    title: "Register Page",
   });
 };

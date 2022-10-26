@@ -14,6 +14,12 @@
 </div>
 <div>
   <button><a href="/list/update/<%= user.id %>">Update</a></button>
-  <button><a href="/list/<%= user.id %>">Delete</a></button>
+  <button
+    type="submit"
+    formmethod="post"
+    formaction="/list/delete/<%= user.id %>"
+  >
+    Delete-POST
+  </button>
 </div>
 <% });%>
