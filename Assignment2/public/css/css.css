@@ -22,6 +22,7 @@ body {
 .main {
   background-image: url(../img/background.png);
   color: #000;
+  position: relative;
 }
 a {
   font-size: 14px;
@@ -65,4 +66,18 @@ fieldset {
 legend {
   font-weight: bold;
   text-align: left;
+}
+button {
+  margin-left: auto;
+  margin-right: auto;
+}
+.show {
+  display: inherit;
+  text-align: center;
+}
+.notshow {
+  display: none;
+}
+.show .buttonDelete {
+  display: inline;
 }

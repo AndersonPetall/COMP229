@@ -2,7 +2,7 @@
 <hr />
 <div>
   <span>name:</span>
-  <%= user.name %>
+  <%= user.username %>
 </div>
 <div>
   <span>phone:</span>
@@ -13,13 +13,20 @@
   <%= user.email %>
 </div>
 <div>
-  <button><a href="/list/update/<%= user.id %>">Update</a></button>
-  <button
-    type="submit"
-    formmethod="post"
-    formaction="/list/delete/<%= user.id %>"
-  >
-    Delete-POST
-  </button>
+  <span>message:</span>
+  <%= user.message %>
+</div>
+<div>
+  <form>
+    <button><a href="/ListOne/update/<%= user.id %>">Update</a></button>
+    <button
+      type="submit"
+      formmethod="post"
+      formaction="/ListOne/delete/<%= user.id %>"
+      class="buttonDelete"
+    >
+      Delete
+    </button>
+  </form>
 </div>
 <% });%>

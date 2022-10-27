@@ -38,6 +38,7 @@ module.exports = function () {
   // Serialize and Deserialize User info
   passport.serializeUser(User.serializeUser());
   passport.deserializeUser(User.deserializeUser());
+  //  Set and Use the stratagy
   passport.use(
     new passportLocal((username, password, done) => {
       User.findByUsername(username, (error, user) => {

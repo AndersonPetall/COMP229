@@ -2,15 +2,19 @@ const mongoose = require("../../config/mongoose");
 const User = require("../models/user.server.model");
 const passport = require("passport");
 // Render login page
-exports.getLoginPage = (req, res, next) => {
+exports.renderLoginPage = (req, res, next) => {
+  if (req.session.lastVisit) {
+    console.log(req.session.lastVisit);
+  }
+  req.session.lastVisit = new Date();
   if (!req.user) {
-    res.render("login", {
+    res.render("Login", {
       title: "Login",
       // alert: 'User Does Not Exist',
       //displayName: req.user ? req.user.displayName : "",
     });
   } else {
-    res.redirect("/list");
+    res.redirect("/List");
   }
 };
 
@@ -22,46 +26,60 @@ exports.loginUser = async (req, res, next) => {
     }
     if (!user) {
       console.log("Authentication Error");
-      return res.redirect("/login");
+      return res.redirect("/Login");
     }
 
     req.login(user, (err) => {
       if (err) {
         return next(err);
       }
-      return res.redirect("/list");
+      return res.redirect("/List");
     });
   })(req, res, next);
 };
 
-exports.create = function (req, res, next) {
+exports.createOrRegisterUser = function (req, res, next) {
   try {
     User.create(req.body);
-    res.redirect("/list");
+    res.redirect("/List");
   } catch (err) {
     console.log("no");
     return next(err);
   }
 };
 exports.list = async function (req, res, next) {
-  User.find({}, (err, users) => {
-    if (err) {
-      return next(err);
-    } else {
-      res.render("BusinessContactsList", {
-        title: "BusinessContactListPage Page",
-        users: users,
-      });
-    }
-  }).sort({ name: 1 });
+  if (!req.user) {
+    res.redirect("/NotAllow");
+  } else {
+    User.find({}, (err, users) => {
+      if (err) {
+        return next(err);
+      } else {
+        res.render("BusinessContactsList", {
+          title: "BusinessContactListPage Page",
+          users: users,
+        });
+      }
+    }).sort({ username: 1 });
+  }
 };
 exports.listOne = async function (req, res, next) {
+  if (req.session.lastVisit) {
+    console.log(req.session.lastVisit);
+  }
+  req.session.lastVisit = new Date();
   User.findById(req.params.id, (err, user) => {
     if (err) {
       return next(err);
     } else {
-      res.render("BusinessContactsListDetail", {
+      res.render("BusinessContactsListOne", {
         title: "BusinessContactsListDetail Page",
+        classTypeInfor: "show",
+        activity: "Update",
+        classTypeUpdate: "show",
+        classTypeDelete: "show",
+        classTypeCancel: "show",
+        classTypeRegister: "notshow",
         user: user,
       });
     }
@@ -72,8 +90,7 @@ exports.update = async function (req, res, next) {
     if (err) {
       return next(err);
     } else {
-      console.log(user);
-      res.redirect("/list");
+      res.redirect("/List");
     }
   });
 };
@@ -82,37 +99,11 @@ exports.delete = async function (req, res, next) {
     if (err) {
       return next(err);
     } else {
-      res.redirect("/list");
+      res.redirect("/List");
     }
   });
 };
-exports.renderLoginPage = function (req, res) {
-  if (req.session.lastVisit) {
-    console.log(req.session.lastVisit);
-  }
-  req.session.lastVisit = new Date();
-  res.render("Login", {
-    title: "Login Page",
-  });
-};
-exports.renderUpdatePage = function (req, res) {
-  if (req.session.lastVisit) {
-    console.log(req.session.lastVisit);
-  }
-  req.session.lastVisit = new Date();
-  res.render("Update", {
-    title: "Update Page",
-  });
-};
-exports.renderBusinessContactsListPage = function (req, res) {
-  if (req.session.lastVisit) {
-    console.log(req.session.lastVisit);
-  }
-  req.session.lastVisit = new Date();
-  res.render("BusinessContactsList", {
-    title: "BusinessContactListPage Page",
-  });
-};
+
 exports.renderRegisterPage = function (req, res) {
   if (req.session.lastVisit) {
     console.log(req.session.lastVisit);
@@ -120,5 +111,22 @@ exports.renderRegisterPage = function (req, res) {
   req.session.lastVisit = new Date();
   res.render("Register", {
     title: "Register Page",
+    classTypeInfor: "notshow",
+    activity: "Register",
+    classTypeUpdate: "notshow",
+    classTypeDelete: "notshow",
+    classTypeCancel: "notshow",
+    classTypeRegister: "show",
+    user: "",
+  });
+};
+
+exports.renderNotAllowPage = function (req, res) {
+  if (req.session.lastVisit) {
+    console.log(req.session.lastVisit);
+  }
+  req.session.lastVisit = new Date();
+  res.render("NotAllow", {
+    title: "Not Allow Page",
   });
 };

@@ -21,38 +21,7 @@
               <td><h2>Register View Home Page</h2></td>
             </tr>
             <tr>
-              <td rowspan="3">
-                <form action="/MessagesPage" method="post">
-                  <fieldset>
-                    <legend>&nbsp&nbspAny Comments&nbsp&nbsp</legend>
-                    Username:
-                    <input type="text" name="username" id="name" /><br />
-                    Email: <input type="text" name="email" id="email" /><br />
-                    Phone: <input type="text" name="phone" id="phone" /><br />
-                    Password:
-                    <input
-                      type="password"
-                      name="password"
-                      id="password"
-                    /><br />
-                    Message:<br />
-                    <textarea
-                      name="message"
-                      rows="3"
-                      cols="28"
-                      id="message"
-                    ></textarea
-                    ><br />
-                    <button
-                      type="submit"
-                      formmethod="post"
-                      formaction="/Register"
-                    >
-                      Register-POST
-                    </button>
-                  </fieldset>
-                </form>
-              </td>
+              <td><%-include("./partials/contentOne")%></td>
             </tr>
           </table>
         </td>

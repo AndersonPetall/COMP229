@@ -1,28 +1,18 @@
 const userController = require("../../app/controllers/user.server.controller");
 module.exports = function (app) {
-  //app.post("/users", userController.create).get("/users", userController.list);
-  //app.get("/list", userController.list);
-  app.route("/list").get(userController.list);
+  app.route("/List").get(userController.list);
   app
-    .route("/login")
-    .get(userController.getLoginPage)
+    .route("/Login")
+    .get(userController.renderLoginPage)
     .post(userController.loginUser);
   app
-    .route("/list/:id")
-    .get(userController.listOne)
-    .post(userController.update)
-    .delete(userController.delete);
-  app
-    .route("/list/update/:id")
+    .route("/ListOne/update/:id")
     .get(userController.listOne)
     .post(userController.update);
-  app.route("/list/delete/:id").post(userController.delete);
-  app.get("/Update", userController.renderUpdatePage);
+  app.route("/ListOne/delete/:id").post(userController.delete);
   app
-    .get("/register", userController.renderRegisterPage)
-    .post("/register", userController.create);
-  app.get(
-    "/BusinessContactsList",
-    userController.renderBusinessContactsListPage
-  );
+    .route("/Register")
+    .get(userController.renderRegisterPage)
+    .post(userController.createOrRegisterUser);
+  app.route("/NotAllow").get(userController.renderNotAllowPage);
 };
