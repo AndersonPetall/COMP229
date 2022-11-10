@@ -1,0 +1,54 @@
+<div class="text-center container py-lg-5">
+  <h1 class="display-4">Hello, this is IMPACT !!!</h1>
+  <p class="lead">
+    Tour-IMPACT is a free tournament management web application for sports event
+    directors to schedule events, manage registrations & staff, process
+    payments, create brackets, provide real-time updates, and much more which
+    aiming to bringing players, tournament organizers and fans closer together.
+    We are enthusiastic to provide accessible and friendly tools that bring your
+    tournaments to the next level.
+  </p>
+  <p class="lead">
+    We are passionate about providing easy-to-use and friendly tools to take
+    your tournaments to the next level.
+  </p>
+  <br /><br />
+  <div type="button" class="btn btn-lg btn btn-success text-center">
+    + CREATE
+  </div>
+</div>
+
+<hr class="py-1" />
+<div class="album py-8">
+  <div class="container">
+    <div class="row text-black">
+      <div class="col-sm-4 py-2" *ngFor="let event of events">
+        <div class="card">
+          <img src="{{ event.imageUrl }}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{ event.type }}</h5>
+            <p class="card-text">
+              Date: {{ event.startDay }} - {{ event.endDay }}
+            </p>
+            <p class="card-text">Description:{{ event.description }}</p>
+            <p class="card-text">
+              participator:<span *ngFor="let contestant of event.contestants"
+                >{{ contestant }}
+              </span>
+            </p>
+
+            <div class="btn-group">
+              <div type="button" class="btn btn-sm btn-outline-secondary">
+                view&update
+              </div>
+              <div type="button" class="btn btn-sm btn-outline-danger">
+                delete
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="py-3" />
