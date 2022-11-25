@@ -1,0 +1,63 @@
+<div class="p-2 text-center text-white py-lg-5">
+  <h3>Tournament Create Page</h3>
+</div>
+<hr class="mt-5 pt-5" />
+
+<main class="container-fluid py-lg-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-sm-8 offset-sm-1">
+      <h1 class="py-3">Please fill</h1>
+      <form novalidate #form="ngForm" (ngSubmit)="create(form)">
+        <div class="form-group">
+          <label>Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="type"
+            [(ngModel)]="event.type"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            [(ngModel)]="event.description"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Start Date</label>
+          <input
+            type="text"
+            class="form-control"
+            name="startDay"
+            [(ngModel)]="event.startDay"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>End Date</label>
+          <input
+            type="text"
+            class="form-control"
+            name="endDay"
+            [(ngModel)]="event.endDay"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary m-1">
+          <i class="fas fa-plus-circle"></i>
+          Create
+        </button>
+        <button type="reset" class="btn btn-secondary" routerLink="/">
+          <i class="fas fa-undo"></i> Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <hr class="my-5 py-5" />
+</main>
