@@ -1,0 +1,53 @@
+<div class="text-center container py-lg-5">
+  <h1 class="display-4">Hello, {{ username }}</h1>
+  <p class="lead">
+    This is the personal page where you can create your own tournament !!
+  </p>
+  <br /><br />
+  <div
+    type="button"
+    class="btn btn-lg btn btn-success text-center"
+    routerLink="/create"
+  >
+    + CREATE
+  </div>
+</div>
+
+<hr class="py-1" />
+<div class="album py-8">
+  <div class="container">
+    <div class="row text-black">
+      <div class="col-sm-4 py-2" *ngFor="let event of events">
+        <div class="card">
+          <img src="{{ event.imageUrl }}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{ event.type }}</h5>
+            <p class="card-text">
+              Date: {{ event.startDay }} - {{ event.endDay }}
+            </p>
+            <p class="card-text">Description:{{ event.description }}</p>
+            <p class="card-text">Participators Number:{{ event.number }}</p>
+
+            <div class="btn-group">
+              <div
+                type="button"
+                class="btn btn-sm btn-outline-secondary"
+                routerLink="/tournaments/:{{ event._id }}"
+              >
+                view&update
+              </div>
+              <div
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                (click)="onDelete(event._id)"
+              >
+                delete
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="py-3" />

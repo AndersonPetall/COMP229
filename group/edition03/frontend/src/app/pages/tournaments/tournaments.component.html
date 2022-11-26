@@ -1,0 +1,81 @@
+<div class="p-2 text-center text-white py-lg-5">
+  <h3>Tournament Detail Page</h3>
+</div>
+<hr class="mt-5 pt-5" />
+
+<main class="container-fluid py-lg-5">
+  <div class="row">
+    <div class="container px-5 mx-5">
+      <p>Type:{{ event.type }}</p>
+      <p>Date:{{ event.startDay }} - {{ event.endDay }}</p>
+      <p>Description:{{ event.description }}</p>
+      <p>Participator Number:{{ event.number }}</p>
+    </div>
+
+    <div class="col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-sm-8 offset-sm-1">
+      <h1 class="py-3">Update</h1>
+      <form novalidate #form="ngForm" (ngSubmit)="update(form)">
+        <div class="form-group">
+          <label>Type</label>
+          <select class="form-select" name="type" [(ngModel)]="event.type">
+            <option value="soccer">Soccer</option>
+            <option value="basketball">Basketball</option>
+            <option value="baseball" selected>Baseball</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group-lg">
+          <label>Description</label>
+          <textarea
+            class="form-control"
+            name="description"
+            [(ngModel)]="event.description"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Start Date</label>
+          <input
+            type="date"
+            class="form-control"
+            name="startDay"
+            [(ngModel)]="event.startDay"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>End Date</label>
+          <input
+            type="date"
+            class="form-control"
+            name="endDay"
+            [(ngModel)]="event.endDay"
+          />
+        </div>
+        <div class="form-group">
+          <label>Participators Number</label>
+          <input
+            type="number"
+            class="form-control"
+            name="endDay"
+            [(ngModel)]="event.number"
+            min="2"
+            max="18"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary m-1">
+          <i class="fas fa-plus-circle"></i>
+          Updata
+        </button>
+        <button type="reset" class="btn btn-secondary" routerLink="/personal">
+          <i class="fas fa-undo"></i> Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <hr class="my-5 py-5" />
+</main>

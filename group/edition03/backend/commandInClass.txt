@@ -1,0 +1,12 @@
+npm init  server.js
+
+npm install body-parser compression cors dotenv express express-session method-override mongoose morgan passport passport-local passport-local-mongoose
+
+
+npm  install @types/express @types/express-session @types/mongoose @types/passport @types/passport-local @types/passport-local-mongoose --save-dev
+
+
+前端 
+npm run startApp
+后端
+ng serve
