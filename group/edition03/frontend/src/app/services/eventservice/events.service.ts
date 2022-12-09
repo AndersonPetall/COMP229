@@ -6,7 +6,8 @@ import { Event } from 'Event';
   providedIn: 'root',
 })
 export class EventsService {
-  private url = 'http://localhost:2233/api/';
+  //private url = 'http://localhost:2233/api/';
+  private url = 'https://impact-backend-test01.onrender.com/api/';
 
   constructor(private http: HttpClient) {}
   createOneEvent(event: Event): Observable<any> {
